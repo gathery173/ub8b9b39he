@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finish</title>
+    <!-- Include Font Awesome CSS (you can change the version if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="styles/index/index.css">
+</head>
+
+<body style="display: flex; flex-direction: column; padding-top: 20px; position: relative; color: white; font-family: 'Montserrat', sans-serif;">
+
+    <div id="contentContainer" style="text-align: center; margin: 0 auto; width: 100%;">
+        <!-- Placeholder for msg div -->
+        <div id="msgPlaceholder"></div>
+        <div id="msg" class="message">
+            <b><h2>Gathery Voting</h2></b>
+            <br>
+            <div>Дякуємо за участь</div>
+            <div>Результат буде оголошений згодом</div>
+        </div>
+
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+        <script>
+            const username = localStorage.getItem('gathery_username');
+        const password = localStorage.getItem('gathery_password');
+
+        if (!username || !password) {
+            // Redirect to index.html if credentials are not found
+            window.location.href = 'index.html';
+        }
+            // Initialize Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyBooRw8q86fnSegmIk9PC9ynkbp6ODyQoE",
+                authDomain: "opijk-f14cd.firebaseapp.com",
+                databaseURL: "https://opijk-f14cd-default-rtdb.firebaseio.com",
+                projectId: "opijk-f14cd",
+                storageBucket: "opijk-f14cd.appspot.com",
+                messagingSenderId: "970116476040",
+                appId: "1:970116476040:web:c9c81ac9b47b988028433d"
+            };
+            firebase.initializeApp(firebaseConfig);
+
+            // Function to redirect to result.html
+            function redirectToResult() {
+                window.location.href = 'result.html';
+            }
+
+            // Firebase reference for the result value
+            const resultRef = firebase.database().ref('settings/result');
+
+            // Listen for changes in the result value
+            resultRef.on('value', resultSnapshot => {
+                const resultValue = resultSnapshot.val();
+
+                if (resultValue === true) {
+                    // Redirect to result.html if result value is true
+                    redirectToResult();
+                }
+            });
+        </script>
+    </div>
+
+</body>
+
+</html>

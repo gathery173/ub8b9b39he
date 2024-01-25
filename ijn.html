@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Page Application</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #app {
+            width: 100vw;
+            height: 100vh;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #content {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="content">
+            <h1>Welcome to My SPA</h1>
+            <p>This is a single-page application.</p>
+            <button onclick="showContent('Page 1')">Page 1</button>
+            <button onclick="showContent('Page 2')">Page 2</button>
+            <button onclick="showContent('Page 3')">Page 3</button>
+        </div>
+    </div>
+
+    <script>
+        function showContent(page) {
+            document.getElementById('content').innerHTML = `<h1>${page}</h1><p>This is the content of ${page}.</p>`;
+            
+            // Manipulate browser history
+            const stateObj = { page };
+            const title = `Page - ${page}`;
+            const url = `#${page}`;
+            window.history.pushState(stateObj, title, url);
+        }
+
+        // Prevent navigation using browser buttons
+        window.onpopstate = function(event) {
+            if (event.state) {
+                showContent(event.state.page);
+            } else {
+                // Handle initial page load or navigating beyond the initial state
+                // You can choose to do nothing or redirect to the initial state
+                // For example, redirect to the default page:
+                showContent('Page 1');
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+    <!-- Include Font Awesome CSS (you can change the version if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="styles/index/index.css">
+</head>
+<style>
+        body {
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            position: relative;
+            color: white;
+            margin: 0;
+        }
+
+        #contentContainer {
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        h1 {
+    
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #43517F;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #304569;
+        }
+
+        section {
+            flex: 1;
+            padding: 10px; /* This section takes the remaining space */
+        }
+    </style>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            position: relative;
+        
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+
+        #contentContainer {
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .participant-name {
+            width: 100%;
+            padding-left: 10px;
+            text-align: start;
+        }
+        .result-group {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .result-item {
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+            color: white;
+            background-color: #b8b8b8; /* Grey background for other participants */
+        }
+
+        .result-item.golden {
+            background-color: #ffc532; /* Golden background for top 3 participants */
+        }
+
+        .result-item.dark-golden {
+            color:#dad8d8;
+            background-color: #ba9025; /* Dark Golden background for top 3 participants without user as a teacher */
+        }
+
+        .result-item.grey-background {
+            background-color: grey;
+            color:#dad8d8; /* Grey background for participants 4 and more */
+        }
+
+      
+
+        .home-link {
+            align-self: flex-start;
+        }
+    </style>
+<body>
+
+    <div id="contentContainer">
+        <h1>Gathery Info</h1>
+        <br>
+        <section id="registration" style="display: flex; flex-direction: column;">
+            <hr>
+            <br>
+            <h2>Реєстрація</h2>
+            <br>
+            <hr>
+            <br>
+            <br>
+            <p style="display: flex; flex-wrap: wrap; margin: 0 auto;">
+                Реєстрація на платформі Gathery відбувається через Google Forms. Данні додаються до бази вручну адміністратором! Тому реєстрація відкрита лише до голосування!
+            </p>
+            <br>
+            <div>
+                <a href="https://forms.gle/fu97DR6JR8aCoTFE6" target="_blank" style="color: #ffffff;">Зареєструватися</a>
+            </div>
+            <br>
+            <p style="display: flex; flex-wrap: wrap; margin: 0 auto;">
+                Вчителям реєструватися не потрібно!
+            </p>
+        </section>
+        <br>
+
+        <section id="login" style="display: flex; flex-direction: column;">
+            <hr>
+            <br>
+            <h2>Проблеми з входом</h2>
+            <br>
+            <hr>
+            <br>
+            <br>
+            <p style="display: flex; flex-wrap: wrap; margin: 0 auto;">На сторінці входу при натиску на кнопку "Увійти", якщо виникнуть певні проблеми, у правому нижньому куті відобразиться відповідне повідомлення!</p>
+        </section>
+        <br>
+
+        <section id="forgot" style="display: flex; flex-direction: column;">
+            <hr><br>
+            <h2>Забули пароль</h2>
+            <br>
+            <hr>
+            <br>
+            <br>
+            <p style="display: flex; flex-wrap: wrap; margin: 0 auto;">У день голосування на пошту усіх користувачів буде надісланий лист з данними для входу та посилання!</p>
+            <br>
+            <p>Шоб полегшити процес входу, при переході на сайт Gathery через посилання в мейлі - данні для входу автоматично вводяться у відповідні поля!</p>
+            <br>
+            <p>Вам залишається лише натиснути кнопку "Увійти".</p>
+        </section>
+        <br>
+        <section id="forgot" style="display: flex; flex-direction: column;">
+            <hr><br>
+            <h2>Голосування</h2>
+            <br>
+            <hr>
+            <br>
+            <br>
+            <div class="participant-card red-checkbox" style="display:flex; align-items: center; height:60px; max-width:70%; margin: 0 auto; margin-bottom: 10px;">
+                <div style="flex: 1; margin-left: 10px; text-align: start;">Учасник 1</div>
+                <div style="transform: translateY(-10%)">
+                    <input id="2" class="heart-checkbox">
+                    <label for="2" class="heart-label" style="border-radius: 50%; margin-bottom: 23px; margin-left: 7px;"></label>
+                </div>
+            </div>
+            <div style="display: flex; margin: 0 auto;">
+                <p style="color: white;">Учасник за якого Ви не проголоcували</p>
+            </div>
+            <br>
+            <div class="participant-card" data-participant="${participantId}" style="display:flex; align-items: center; height:60px; max-width:70%; margin: 0 auto; margin-bottom: 10px;">
+                <div style="flex: 1; margin-left: 10px; text-align: start;">Учасник 2</div>
+                <div style="transform: translateY(-10%)">
+                    <input type="checkbox" id="${likeCheckboxId}" class="heart-checkbox" value="${participantId}" onchange="toggleCheckbox(event)" checked>
+                    <label for="1" class="heart-label" style="border-radius: 50%; margin-bottom: 23px; margin-left: 7px;"></label>
+                </div>
+            </div>
+            <div style="display: flex; margin: 0 auto;">
+                <p style="color: white;">Учасник за якого Ви проголоcували</p>
+            </div>
+            <br>
+            <div class="participant-card user-teacher dark-grey-checkbox" style="display:flex; align-items: center; height:60px; max-width:70%; margin: 0 auto; margin-bottom: 10px;">
+                <div style="flex: 1; margin-left: 10px; text-align: start;">Учасник 3</div>
+                <div style="transform: translateY(-10%)">
+                    <input id="3" class="heart-checkbox" disabled>
+                    <label for="3" class="heart-label" style="border-radius: 50%; margin-bottom: 23px; margin-left: 7px;"></label>
+                </div>
+            </div>
+            <div style="display: flex; margin: 0 auto; text-align: center;">
+                <p style="color: white;">Учасник з Вашого класу, за якого не можна проголосувати</p>
+                
+            </div>
+        </section>
+        <br>
+        <section id="forgot" style="display: flex; flex-direction: column;">
+            <hr><br>
+            <h2>Результат</h2>
+            <br>
+            <hr>
+            <br>
+            <br>
+            <div class="result-item golden" style="display: flex; width: 70%; margin: 0 auto;">
+                <div class="place">1</div>
+                <div class="participant-name">Учасник 1</div>
+                <div class="votes">10</div>
+            </div>
+            <br>
+            <p>Учасник з Вашого класу, який зайняв призове місце</p>
+            <br>
+            <div class="result-item dark-golden" style="display: flex; width: 70%; margin: 0 auto;">
+                <div class="place">2</div>
+                <div class="participant-name">Учасник 2</div>
+                <div class="votes">9</div>
+            </div>
+            <br>
+            <p>Учасник не з Вашого класу, який зайняв призове місце</p>
+            <br>
+            <div class="result-item" style="display: flex; width: 70%; margin: 0 auto;">
+                <div class="place">3</div>
+                <div class="participant-name">Учасник 3</div>
+                <div class="votes">5</div>
+            </div>
+            <br>
+            <p>Учасник з Вашого класу, який не зайняв призове місце</p>
+            <br>
+            <div class="result-item grey-background" style="display: flex; width: 70%; margin: 0 auto;">
+                <div class="place">4</div>
+                <div class="participant-name">Учасник 4</div>
+                <div class="votes">2</div>
+            </div>
+            <br>
+            <p>Учасник не з Вашого класу, який не зайняв призове місце</p>
+            <br>
+            <div class="modal-footer">
+                <p>Кількість призових місць визначається адміністратором</p>
+            </div>
+            
+        <br>
+        <h3>Структура картки учасника</h3>
+        <br>
+            <div class="result-item grey-background" style="display: flex; width: 70%; margin: 0 auto;">
+                <div class="place">Місце, яке зайняв</div>
+                <div class="participant-name">Ім'я або клас</div>
+                <div class="votes">Кількість голосів</div>
+            </div>
+        </section>
+        <br>
+        <section id="forgot" style="display: flex; flex-direction: column;">
+            <hr><br>
+            <h2 style="margin: 0 auto;">Адміністрація</h2>
+            <br>
+            <hr>
+            <br>
+            <br>
+            <br>
+            <p>Адміністратором системи Gathery Voting та сайту Gathery є учень 10-го А класу - Прийма Олександр.</p>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                <a href="mailto:pryima.oleksandr@school173.com.ua" style="color: white; text-decoration: none;">
+                    <i class="fas fa-envelope" style="font-size: 24px; margin-right: 10px;"></i>
+                    Email
+                </a>
+                <a href="https://t.me/primon_s" target="_blank" style="color: white; text-decoration: none;">
+                    <i class="fab fa-telegram" style="font-size: 24px; margin-right: 10px;"></i>
+                    Telegram
+                </a>
+            </div>
+        </section>
+        <br><br>
+        <section id="forgot" style="display: flex; flex-direction: column;">
+            <hr><br>
+            <h2 style="margin: 0 auto;">Зворотній зв'язок</h2>
+            <br>
+            <hr>
+            <br>
+            <br>
+            <p style="display: flex; flex-wrap: wrap; margin: 0 auto;">Якщо у вас є питання або пропозиції, Ви можете звернутись до адміністратора або написати на пошту</p>
+            <br>
+            <a href="mailto:gathery@school173.com.ua" style="color: white; text-decoration: none; margin: 0 auto;">
+                <i class="fas fa-envelope" style="font-size: 24px; margin-right: 10px;"></i>
+                Написати
+            </a>
+            <br>
+            
+        </section>
+        <br><br>
+        
+    </div>
+
+</body>
+
+</html>

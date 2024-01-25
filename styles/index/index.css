@@ -1,0 +1,129 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding-top: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    position: relative;
+
+    background: linear-gradient(-45deg, #ff2af4,#d2a83f,#35b9b7, #4964b6);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+}
+
+
+.form-select-class {
+    margin: 10px;
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+
+.participant-card {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7); /* Adjust text color */
+    background: rgba(255, 255, 255, 0.1); /* Adjust background color and opacity */
+    box-shadow: 0px 0px 5px 0px rgba(43, 36, 36, 0.5); /* Adjust box shadow */
+    text-align: center;
+    transition: all 200ms ease-in-out;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px;
+    backdrop-filter: blur(10px); /* Add glass effect */
+}
+
+.participant-card.now-true {
+    border: #8af48a solid 3px;
+    color: #6ed36e;
+    border-radius: 5px;
+    transform: scale(1.01);
+    box-shadow: 0px 0px 10px 0px;
+}
+
+.message {
+    font-size: 18px;
+    color: #ffffff; /* Adjust text color */
+    margin-top: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heart-checkbox {
+    display: none;
+}
+
+.heart-label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 30px; /* Adjust the padding as needed */
+}
+
+.heart-label::before {
+    content: '\f004'; /* Unicode for the heart icon from Font Awesome */
+    font-family: 'Font Awesome 5 Free';
+    position: absolute;
+    left: 0;
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #cbcbcb; /* Adjust the color as needed */
+    transition: color 0.2s ease-in-out;
+}
+
+.heart-checkbox:checked + .heart-label::before {
+    color: #d15c4f; /* Adjust the color for checked state */
+}
+
+.heart-checkbox {
+    display: none;
+}
+
+.heart-checkbox:disabled + .heart-label::before {
+    color: #555; /* Adjust the color for disabled state */
+}
+
+.message {
+    text-align: center;
+    font-size: 18px;
+    position: absolute;
+    top: 50px;
+    width: max-content; /* Adjust the width as needed */
+}
+
+.participant-card.user-teacher {
+
+    background-color: #a4a4a435; /* Dark grey color */
+    color: #555; /* White text color */
+}
+
+.participant-card.now-true.animate {
+    animation: participantAnimation 1s ease-in-out;
+}
+
+/* Apply the neon glow animation when the now value changes to true */
+.participant-card.now-true.neon {
+    animation: neonGlow 1s ease-in-out;
+}
+
+/* Apply the turn off neon animation when the now value changes to false */
+.participant-card.animate.turn-off-neon {
+    animation: turnOffNeon 1s ease-in-out;
+}
+
+.participant-card.now-true.animate {
+    animation: participantAnimation 1s ease-in-out;
+}

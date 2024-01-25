@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Include Font Awesome CSS (you can change the version if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="styles/index/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfexl3WMzoWr2+nTUC1GqDZMy5lqJFfS+8sCet" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <div class="container">
+        <div id="contentContainer" style="text-align: center; margin: 0 auto; width: 100%;">
+            <div id="msgPlaceholder"></div>
+            <div id="msg" class="message">
+
+            </div>        
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <script>
+        const username = localStorage.getItem('gathery_username');
+        const password = localStorage.getItem('gathery_password');
+
+        if (!username || !password) {
+            // Redirect to index.html if credentials are not found
+            window.location.href = 'index.html';
+        }
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBooRw8q86fnSegmIk9PC9ynkbp6ODyQoE",
+            authDomain: "opijk-f14cd.firebaseapp.com",
+            databaseURL: "https://opijk-f14cd-default-rtdb.firebaseio.com",
+            projectId: "opijk-f14cd",
+            storageBucket: "opijk-f14cd.appspot.com",
+            messagingSenderId: "970116476040",
+            appId: "1:970116476040:web:c9c81ac9b47b988028433d"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function removeParticipantCards() {
+            const participantContainer = document.getElementById('contentContainer');
+            participantContainer.innerHTML = ''; // Remove all participant cards
+        }
+
+        function updateVotesForCheckedCheckboxes() {
+            const checkboxes = document.querySelectorAll('.heart-checkbox:checked');
+
+            checkboxes.forEach(checkbox => {
+                const participantId = checkbox.parentElement.parentElement.getAttribute('data-participant');
+                updateVotes(participantId, checkbox);
+            });
+        }
+
+        function displayThankYouMessage() {
+            window.location.href = "finish.html";
+            const messageContainer = document.getElementById('msgPlaceholder');
+
+            if (messageContainer) {
+                messageContainer.innerHTML = "<b><h2>Дякуємо за участь у голосуванні</h2></b><br><p>Очікуйте на результат</p>";
+                messageContainer.style.display = 'block';
+            } else {
+                console.error("Error: Element with ID 'msgPlaceholder' not found.");
+            }
+        }
+
+        function redirectToResults() {
+            window.location.href = 'result.html';
+        }
+
+        function populateContent() {
+    const contentContainer = document.getElementById('contentContainer');
+    const messageContainer = document.getElementById('msg');
+    messageContainer.className = 'message';
+
+    const startRef = firebase.database().ref('settings/start');
+    const endRef = firebase.database().ref('settings/end');
+    const resultRef = firebase.database().ref('settings/result');
+
+    startRef.on('value', startSnapshot => {
+        const startValue = startSnapshot.val();
+        const userTeacher = localStorage.getItem("tj");
+        const userLogin = localStorage.getItem("user_login");
+
+        if (startValue === false) {
+            messageContainer.innerHTML = "<br><br><b><h2>Gathery Voting</h2></b><br><p>Голосування ще не почалося</p><br>";
+        } else {
+            endRef.on('value', endSnapshot => {
+                const endValue = endSnapshot.val();
+
+                if (endValue === true) {
+                    // Voting has ended, update votes for participants with checked checkboxes
+                    updateVotesForCheckedCheckboxes();
+
+                    // Hide the participant container if the voting has ended
+                    contentContainer.style.display = 'none';
+                    // Remove participant cards
+                    removeParticipantCards();
+                    // Display thank you message
+                    displayThankYouMessage();
+                    // Print checked checkboxes after a small delay
+                } else {
+                    // Continue displaying participants if the voting is ongoing
+                    messageContainer.style.display = "none";
+                    contentContainer.style.display = 'block';
+
+                    // Check log value
+                    const logRef = firebase.database().ref(`users/${userLogin}/log`);
+                    logRef.once('value', logSnapshot => {
+                        const logValue = logSnapshot.val();
+                        
+                       
+
+                        const participantContainer = document.createElement('div');
+                        participantContainer.style.display = 'flex';
+                        participantContainer.style.flexWrap = 'wrap';
+
+                        firebase.database().ref('part').on('value', snapshot => {
+                            participantContainer.innerHTML = '';
+
+                            snapshot.forEach(partSnapshot => {
+                                const partName = partSnapshot.key;
+                                const teachersArray = partSnapshot.child('teacher').val();
+
+                                const likeCheckboxId = `like-checkbox-${partName}`;
+                                const participantId = `${partName}`;
+
+                                const isUserTeacherInArray = teachersArray && teachersArray.includes(userTeacher);
+
+                                const cardHTML = `
+                                    <div class="participant-card ${isUserTeacherInArray ? 'user-teacher' : ''}" data-participant="${participantId}" style="display:flex; align-items: center; height:60px; max-width:70%; margin: 0 auto; margin-bottom: 10px;">
+                                        <div style="flex: 1; margin-left: 10px; text-align: start;">${partName}</div>
+                                        <div style="transform: translateY(-10%)">
+                                            <input type="checkbox" id="${likeCheckboxId}" class="heart-checkbox" ${isUserTeacherInArray ? 'disabled' : ''}>
+                                            <label for="${likeCheckboxId}" class="heart-label" style="border-radius: 50%; margin-bottom: 23px; margin-left: 7px;"></label>
+                                        </div>
+                                    </div>
+                                `;
+
+                                participantContainer.innerHTML += cardHTML;
+
+                                const likeCheckbox = document.getElementById(likeCheckboxId);
+                            });
+
+                            contentContainer.appendChild(participantContainer);
+                        });
+                    });
+
+                    resultRef.on('value', resultSnapshot => {
+                        const resultValue = resultSnapshot.val();
+
+                        if (resultValue === true) {
+                            // Redirect to results page if result value is true
+                            redirectToResults();
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+
+        function updateVotes(participantId, checkbox) {
+            const votesRef = firebase.database().ref(`part/${participantId}/votes`);
+            votesRef.transaction((currentVotes) => {
+                const newVotes = (currentVotes || 0) + 1;
+                console.log(`Updating votes for ${participantId}. New votes: ${newVotes}`);
+                return newVotes;
+            }, () => {
+                checkbox.disabled = true;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Run the script after the DOM has fully loaded
+            populateContent();
+        });
+    </script>
+<style>
+    #infoIconContainer {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000; /* Ensure the icon appears above other elements */
+        }
+
+        .fas.fa-info-circle {
+            font-size: 24px;
+            color: #f9f9f9;
+            cursor: pointer;
+        }
+    .example-checkbox input[type="checkbox"]:checked + .example-label {
+        background-color: #ffc532; /* Customize the color for checked checkboxes */
+        border-color: #ffc532; /* Border color for checked checkboxes */
+    }
+
+    .example-checkbox input[type="checkbox"]:disabled + .example-label {
+        background-color: #b8b8b8; /* Background color for disabled checkboxes */
+        border-color: #b8b8b8; /* Border color for disabled checkboxes */
+        cursor: not-allowed; /* Change cursor for disabled checkboxes */
+    }
+
+    .example-checkbox {
+        display: flex;
+        align-items: center;
+    }
+
+    .example-label {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #dad8d8; /* Default border color for checkboxes */
+        margin-right: 10px;
+    }
+</style>
+</body>
+</html>
