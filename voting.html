@@ -62,10 +62,14 @@
         function updateVotesForCheckedCheckboxes() {
             const checkboxes = document.querySelectorAll('.heart-checkbox:checked');
 
-            checkboxes.forEach(checkbox => {
-                const participantId = checkbox.parentElement.parentElement.getAttribute('data-participant');
-                updateVotes(participantId, checkbox);
-            });
+            checkboxes.forEach((checkbox, index) => {
+        const participantId = checkbox.parentElement.parentElement.getAttribute('data-participant');
+        
+        // Use setTimeout to add a delay between updates
+        setTimeout(() => {
+            updateVotes(participantId, checkbox);
+        }, 500);
+    });
         }
 
         function displayThankYouMessage() {
